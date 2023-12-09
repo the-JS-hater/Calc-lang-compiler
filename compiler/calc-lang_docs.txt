@@ -1,0 +1,45 @@
+Calc-lang is a simple, essentially made up as far as i know, programming language for the Liu course TDDE24, assignment 6
+
+ENBF -------------------------------------
+
+Program = 'calc', Statements
+
+Statements = Statement | Statements
+
+Statement = 
+        Assignment
+      | Repetition
+      | Selection
+      | Input
+      | Output
+
+Assignment = 'set', Variable, Expression
+
+Repetition = 'while', Condition, Statements
+
+Selection = 'if', Condition, Statement | 'if', Condition, Statement, Statement
+
+Input = 'read', Variable
+
+Output = 'print', Expression
+
+Expression = 
+        Constant
+      | Variable
+      | Binary_expression
+
+Condition = Expression, Conditional_operator, Expression
+
+Binary_expression = Expression, Binary_operator, Expression
+
+Conditional_operator = < | > | =
+
+Binary_operator = * | + | - | /
+
+Constant = int | float
+
+Variable = any alphabetical(latin) string not containing numbers
+
+Extra rules and stuff -----------------------------------------------
+
+Program, Statement, Condition, and Binary_expression's must be contained within brackets []
