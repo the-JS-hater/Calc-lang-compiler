@@ -1,0 +1,1 @@
+calc_abs = ['calc',['read', 'n'],['if', ['n', '<', 0],['set', 'abs', [0, '-', 'n']],['set', 'abs', 'n']],['print', 'abs']]

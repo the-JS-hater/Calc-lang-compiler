@@ -1,0 +1,8 @@
+calc_ex1 = ['calc', ['read', 'p1'], ['set', 'p2', 47], ['set', 'p3', 179], ['set', 'res', [['p1', '*', 'p2'], '-', 'p3']], ['print', 'res']]
+calc_ex2 = ['calc',['read', 'x'],['set', 'zero', 0],['set', 'pos', 1],['set', 'nonpos', -1],['if', ['x', '=', 0],['print', 'zero']],['if', ['x', '>', 0],['print', 'pos'],['print', 'nonpos']]]
+calc_mult = ['calc',['read', 'x'],['read', 'y'],['set', 'product', ['x', '*', 'y']],['print', 'product']]
+calc_abs = ['calc',['read', 'n'],['set', 'abs', 'n'],['if', ['n', '<', 0],['set', 'abs', [0, '-', 'n']]],['print', 'abs']]
+calc_sum = ['calc',['read', 'n'],['set', 'sum', 0],['while', ['n', '>', 0],['set', 'sum', ['sum', '+', 'n']],['set', 'n', ['n', '-', 1]]],['print', 'sum']]
+calc_factorial = ['calc',['read', 'n'],['set', 'res', 1],['while', ['n', '>', 0],['set', 'res', ['res', '*', 'n']],['set', 'n', ['n', '-', 1]]],['print', 'res']]
+calc_smallest = ['calc',['read', 'count'],['read', 'number'],['set', 'smallest', 'number'],['set', 'count', ['count', '-', 1]],['while', ['count', '>', 0],['read', 'number'],['if', ['number', '<', 'smallest'],['set', 'smallest', 'number']],['set', 'count', ['count', '-', 1]]],['print', 'smallest']]
+calc_fib = ['calc',['read', 'n'],['set', 'last', 1],['set', 'butlast', 1],['set', 'result', 1],['while', ['n', '>', 2],['set', 'result', ['last', '+', 'butlast']],['set', 'butlast', 'last'],['set', 'last', 'result'],['set', 'n', ['n', '-', 1]]],['print', 'result']]
