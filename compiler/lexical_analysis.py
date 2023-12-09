@@ -171,7 +171,7 @@ def is_num(num: str) -> bool:
         float(num)
         return True
     except ValueError:
-        True
+        False
 
 
 def print_token(token: Token) -> None:
