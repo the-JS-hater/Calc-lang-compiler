@@ -8,7 +8,7 @@ from lexical_analysis import Token
 from typing import NamedTuple, Union, Optional
 import sys
 
-sys.tracebacklimit = 0  # Only wanna get my compilers error message
+# sys.tracebacklimit = 0  #-- When i only wanna get my compilers error message with no traceBack
 
 #TODO remove later, for testing
 from lexical_analysis import perform_lexical_analysis
@@ -208,7 +208,7 @@ def parse_repetition(token_vec: list[Token]) -> tuple[Repetition, list[Token]]:
     try:
 
         condition, token_vec = parse_condition(token_vec[1:])
-        statements, token_vec = parse_statements(token_vec[1:])
+        statements, token_vec = parse_statements(token_vec, [])
 
         check_bracket_closure(token_vec)
 
@@ -319,7 +319,7 @@ def parse_condition(token_vec: list[Token]) -> tuple[Condition, list[Token]]:
     """Parse a condition with form [expression, operator, expression]"""
 
     try:
-        left_expression, token_vec = parse_expression(token_vec)
+        left_expression, token_vec = parse_expression(token_vec[1:])
 
         operator = token_vec[0]
 

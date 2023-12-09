@@ -43,3 +43,7 @@ Variable = any alphabetical(latin) string not containing numbers
 Extra rules and stuff -----------------------------------------------
 
 Program, Statement, Condition, and Binary_expression's must be contained within brackets []
+
+Style guide ---------------------------------------------------------
+
+#TODO

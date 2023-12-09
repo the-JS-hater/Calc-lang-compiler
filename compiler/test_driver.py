@@ -11,7 +11,7 @@ from syntactic_analysis import parse_program, Program, Statements, Statement
 
 def print_AST(program: Program):
 
-    print("============== vvv Tokens vvv ===============")
+    print("============ vvv AST nodes vvv =============")
     print("Root node: " + program.keyword)
 
     statements = program.statements
@@ -36,9 +36,9 @@ def print_token_list(token_vec: list[Token]):
 
 if __name__ == "__main__":
         
-        try:
-            token_vec = perform_lexical_analysis("easy_prog.txt")
-            program = parse_program(token_vec)
-
-        except SyntaxError as e:
-            raise e
+        
+        token_vec = perform_lexical_analysis("programs\\fibbonachi.txt")
+            
+        program = parse_program(token_vec)
+        print_token_list(token_vec)
+        print_AST(program)

@@ -1,0 +1,12 @@
+['calc',
+    ['read', 'n'],
+    ['set', 'last', 1],
+    ['set', 'butlast', 1],
+    ['set', 'result', 1],
+    ['while', ['n', '>', 2],
+        ['set', 'result', ['last', '+', 'butlast']],
+        ['set', 'butlast', 'last'],
+        ['set', 'last', 'result'],
+        ['set', 'n', ['n', '-', 1]]
+    ],
+    ['print', 'result']]
