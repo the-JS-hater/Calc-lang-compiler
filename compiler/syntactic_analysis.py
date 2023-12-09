@@ -351,5 +351,7 @@ def build_AST_tree(token_vec: list[Token]): # Return root-node pointer
 
 # MAIN ==================================================================================================
 
+#TODO test this shit
+
 if __name__ == "__main__":
     pass
