@@ -37,7 +37,7 @@ def print_token_list(token_vec: list[Token]):
 if __name__ == "__main__":
         
         
-        token_vec = perform_lexical_analysis("programs\\fibbonachi.txt")
+        token_vec = perform_lexical_analysis("programs\\easy_prog.txt")
             
         program = parse_program(token_vec)
         print_token_list(token_vec)

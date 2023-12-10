@@ -337,6 +337,8 @@ def parse_condition(token_vec: list[Token]) -> tuple[Condition, list[Token]]:
 
 def check_bracket_closure(token_vec: list[Token]) -> None:
     """Called to ensure open brackets are properly closed"""
+    if not token_vec:
+        raise SyntaxError("Exprected ], failed to locate issue")
 
     if not token_vec[0].token_type == "closed_bracket":
             raise SyntaxError("Expected ] found {} at line {}".format(token_vec[0].lexeme, token_vec[0].row))
