@@ -396,6 +396,28 @@ def selection_false_branch(statement: Selection) -> Statement:
     return statement.false_branch_statement
 
 
+def input_variable(statement: Input) -> str:
+    return statement.variable
+
+
+def output_expression(statement: Output) -> Expression:
+    return statement.output_expression
+
+
+def is_variable(expression: Expression) -> bool:
+    return expression.variable != None
+
+
+def is_constant(expression: Expression) -> bool:
+    return expression.constant != None
+
+
+def is_binary_expression(expression: Expression) -> bool:
+    return expression.binary_expression != None
+
+
+def repetition_statements(statement: Repetition) -> list[Statement]:
+    return statement.repetition_statements
 
 
 # MAIN ==================================================================================================

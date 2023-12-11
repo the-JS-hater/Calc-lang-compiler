@@ -64,22 +64,44 @@ def analyze_statement(statement: Statement, variable_lookup_table: dict, scope: 
 
 def analyze_selection(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
     analyze_condition(statement_condition(statement, variable_lookup_table, scope))
+    variable_lookup_table = analyze_statement(selection_true_branch(statement, variable_lookup_table, scope + 1))
+
+    if selection_has_false_branch(statement):
+        variable_lookup_table = analyze_statement(selection_false_branch(statement), variable_lookup_table, scope + 1)
+
+    return variable_lookup_table
 
 
 def analyze_input(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
-    pass
+    variable_lookup_table[input_variable(statement)] = scope
+    return variable_lookup_table
 
 
-def analyze_output(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
-    pass
+def analyze_output(statement: Statement, variable_lookup_table: dict, scope: int) -> None:
+    if is_constant(output_expression(statement)):
+        return
 
+    if is_variable(output_expression(statement)):
+        variable = output_expression(statement)
+        if not variable in variable_lookup_table:
+            raise SyntaxError("Undefined variable {} at line {}".format(variable, statement.first_token.row))
+        
+        if variable_lookup_table[variable] > scope:
+            raise SyntaxError("Variable {} refrenced before assignment at line {}".format(variable, statement.first_token.row))
+        
+    if is_binary_expression(output_expression(statement)):
+        analyze_binary_expression(output_expression(statement))
+
+    raise SyntaxError("Invalid expression {} at line {}".format(output_expression(statement), statement.first_token.row))
+    
 
 def analyze_repetition(statement: Statement, variable_lookup_table: dict,  scope: int) -> dict:
-    pass
+    return analyze_statements(repetition_statements(statement), variable_lookup_table, scope + 1)
 
 
 def analyze_assignment(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
-    pass
+    variable_lookup_table[assignment_variable(statement)] = scope
+    return variable_lookup_table
 
 
 def analyze_expression(expression: Expression, variable_lookup_table: dict, scope: int) -> dict:
