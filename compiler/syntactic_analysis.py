@@ -346,6 +346,7 @@ def check_bracket_closure(token_vec: list[Token]) -> None:
 
 # SEMANTIC HELP FUNCTIONS ===============================================================================
 
+# Program -------------------------------------------------------
 
 def verify_program(program: Program) -> bool:
     if not isinstance(program, Program):
@@ -363,6 +364,7 @@ def verify_program(program: Program) -> bool:
 def program_statements(program: Program) -> list[Statement]:
     return program.statements
 
+# Statements -------------------------------------------------------
 
 def first_statement(statements: Statements) -> Statement:
     return statements.first_statement
@@ -375,6 +377,7 @@ def rest_statements(statements: Statements) -> list[Statement]:
 def is_empty_statements(statements: list[Statement]) -> bool:
     return not statements
 
+# Statement -------------------------------------------------------
 
 def get_statement_keyword(statement: Statement) -> str:
     return statement.keyword
@@ -383,6 +386,7 @@ def get_statement_keyword(statement: Statement) -> str:
 def statement_condition(statement: Statement) -> Condition:
     return statement.condition
 
+# Selection -------------------------------------------------------
 
 def selection_true_branch(statement: Selection) -> Statement:
     return statement.true_branch_statement
@@ -395,10 +399,12 @@ def selection_has_false_branch(statement: Selection) -> bool:
 def selection_false_branch(statement: Selection) -> Statement:
     return statement.false_branch_statement
 
+# Input -----------------------------------------------------------
 
 def input_variable(statement: Input) -> str:
     return statement.variable
 
+# Expression ------------------------------------------------------
 
 def output_expression(statement: Output) -> Expression:
     return statement.output_expression
@@ -415,9 +421,15 @@ def is_constant(expression: Expression) -> bool:
 def is_binary_expression(expression: Expression) -> bool:
     return expression.binary_expression != None
 
+# Repetition ------------------------------------------------------
 
 def repetition_statements(statement: Repetition) -> list[Statement]:
     return statement.repetition_statements
+
+# Assignment ------------------------------------------------------
+
+def assignment_variable(statement: Assignment) -> str:
+    return statement.variable
 
 
 # MAIN ==================================================================================================
