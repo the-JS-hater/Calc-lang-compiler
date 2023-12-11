@@ -16,6 +16,7 @@ from typing import ensure
 
 
 def variable_analysis(program: Program):
+    """Recursivley look through the calc program structure to find illegal variable access"""
 
     try:
         verify_program(program)
@@ -29,6 +30,7 @@ def variable_analysis(program: Program):
 
 
 def analyze_statements(statements: Statements, variable_lookup_table: dict, scope: int) -> dict:
+    """Recursivley go through the statements structure"""
     
     if is_empty_statements(rest_statements(statements)):
         analyze_statement(first_statement(statements))
@@ -39,6 +41,8 @@ def analyze_statements(statements: Statements, variable_lookup_table: dict, scop
 
 
 def analyze_statement(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
+    """Validate a Statement's variable safety"""
+
     keyword = get_statement_keyword(statement)
 
     if not keyword in KEYWORDS:
@@ -63,6 +67,8 @@ def analyze_statement(statement: Statement, variable_lookup_table: dict, scope: 
 
 
 def analyze_selection(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
+    """Pick apart a selection statement and validate variable safety"""
+
     analyze_condition(statement_condition(statement, variable_lookup_table, scope))
     variable_lookup_table = analyze_statement(selection_true_branch(statement, variable_lookup_table, scope + 1))
 
@@ -73,11 +79,15 @@ def analyze_selection(statement: Statement, variable_lookup_table: dict, scope: 
 
 
 def analyze_input(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
+    """Add the input variable to the variable lookup table"""
+
     variable_lookup_table[input_variable(statement)] = scope
     return variable_lookup_table
 
 
 def analyze_output(statement: Statement, variable_lookup_table: dict, scope: int) -> None:
+    """Validate the variable safety of the output espression"""
+
     if is_constant(output_expression(statement)):
         return
 
@@ -96,10 +106,13 @@ def analyze_output(statement: Statement, variable_lookup_table: dict, scope: int
     
 
 def analyze_repetition(statement: Statement, variable_lookup_table: dict,  scope: int) -> dict:
+    """Validate the variable statements of a repetition statement """
     return analyze_statements(repetition_statements(statement), variable_lookup_table, scope + 1)
 
 
 def analyze_assignment(statement: Statement, variable_lookup_table: dict, scope: int) -> dict:
+    """Add the assignment variable to the variable lookup table"""
+
     variable_lookup_table[assignment_variable(statement)] = scope
     return variable_lookup_table
 
