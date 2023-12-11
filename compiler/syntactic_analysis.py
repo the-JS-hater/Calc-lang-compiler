@@ -8,7 +8,7 @@ from lexical_analysis import Token
 from typing import NamedTuple, Union, Optional
 import sys
 
-# sys.tracebacklimit = 0  #-- When i only wanna get my compilers error message with no traceBack
+sys.tracebacklimit = 0  #-- When i only wanna get my compilers error message with no traceBack
 
 #TODO remove later, for testing
 from lexical_analysis import perform_lexical_analysis
@@ -344,11 +344,58 @@ def check_bracket_closure(token_vec: list[Token]) -> None:
             raise SyntaxError("Expected ] found {} at line {}".format(token_vec[0].lexeme, token_vec[0].row))
 
 
-# TREE= =================================================================================================
+# SEMANTIC HELP FUNCTIONS ===============================================================================
 
 
-def build_AST_tree(token_vec: list[Token]): # Return root-node pointer
-    pass
+def verify_program(program: Program) -> bool:
+    if not isinstance(program, Program):
+        raise SyntaxError("Not a valid a 'calc' program")
+    
+    if not program.keyword == 'calc':
+        raise SyntaxError("Not a valid a 'calc' program")
+
+    if not program.statements:
+        raise SyntaxError("Program has no statements!")
+    
+    return True
+
+
+def program_statements(program: Program) -> list[Statement]:
+    return program.statements
+
+
+def first_statement(statements: Statements) -> Statement:
+    return statements.first_statement
+
+
+def rest_statements(statements: Statements) -> list[Statement]:
+    return statements.rest_statement
+
+
+def is_empty_statements(statements: list[Statement]) -> bool:
+    return not statements
+
+
+def get_statement_keyword(statement: Statement) -> str:
+    return statement.keyword
+
+
+def statement_condition(statement: Statement) -> Condition:
+    return statement.condition
+
+
+def selection_true_branch(statement: Selection) -> Statement:
+    return statement.true_branch_statement
+
+
+def selection_has_false_branch(statement: Selection) -> bool:
+    return statement.false_branch_statement != None
+
+
+def selection_false_branch(statement: Selection) -> Statement:
+    return statement.false_branch_statement
+
+
 
 
 # MAIN ==================================================================================================

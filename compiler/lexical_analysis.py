@@ -6,6 +6,10 @@
 
 from typing import NamedTuple, Union
 
+import sys
+
+sys.tracebacklimit = 0
+
 # STRUCTS ================================================================================================
 
 Token = NamedTuple("Token", [
