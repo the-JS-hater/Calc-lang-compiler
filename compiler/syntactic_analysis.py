@@ -78,7 +78,7 @@ Expression = NamedTuple("Expression", [
 Binary_expression = NamedTuple("Binary_expression", [
     ("left_expression", NamedTuple),
     ("binary_oper", str),
-    ("roght_expression", NamedTuple),
+    ("right_expression", NamedTuple),
     ("first_token", Token)
 ])
 
@@ -420,6 +420,18 @@ def is_constant(expression: Expression) -> bool:
 
 def is_binary_expression(expression: Expression) -> bool:
     return expression.binary_expression != None
+
+
+def right_expression(expression: Expression) -> Expression:
+    return expression.right_expression
+
+
+def left_expression(expression: Expression) -> Expression:
+    raise expression.left_expression
+
+
+def expression_variable(expression: Expression) -> str:
+    return expression.variable
 
 # Repetition ------------------------------------------------------
 

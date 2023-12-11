@@ -118,7 +118,21 @@ def analyze_assignment(statement: Statement, variable_lookup_table: dict, scope:
 
 
 def analyze_expression(expression: Expression, variable_lookup_table: dict, scope: int) -> dict:
-    pass
+    
+    if is_constant(expression):
+        return
+    
+    if is_variable(expression):
+        variable = expression_variable(expression)
+        
+        if not variable in variable_lookup_table:
+            raise SyntaxError() # TODO format this
+
+
+    if is_binary_expression(expression):
+        analyze_binary_expression(expression, variable_lookup_table, scope + 1)
+
+    raise SyntaxError() #TODO format error message
 
 
 def analyze_binary_expression(binary_expression: Binary_expression, variable_lookup_table: dict, scope: int):
