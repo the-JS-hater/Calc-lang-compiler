@@ -4,7 +4,7 @@
 
 # IMPORTS ===============================================================================================
 
-from lexical_analysis import Token
+from lexical_analysis import Token, CONDOPER, BINNARYOPER
 from typing import NamedTuple, Union, Optional
 import sys
 
@@ -404,11 +404,12 @@ def selection_false_branch(statement: Selection) -> Statement:
 def input_variable(statement: Input) -> str:
     return statement.variable
 
-# Expression ------------------------------------------------------
+# Output ----------------------------------------------------------
 
 def output_expression(statement: Output) -> Expression:
     return statement.output_expression
 
+# Expression ------------------------------------------------------
 
 def is_variable(expression: Expression) -> bool:
     return expression.variable != None
@@ -427,11 +428,17 @@ def right_expression(expression: Expression) -> Expression:
 
 
 def left_expression(expression: Expression) -> Expression:
-    raise expression.left_expression
+    return expression.left_expression
 
 
 def expression_variable(expression: Expression) -> str:
     return expression.variable
+
+def get_binary_operator(binary_expression: Binary_expression) -> str:
+    return binary_expression.binary_oper
+
+def is_binary_operator(operator: str) -> bool:
+    return operator in BINNARYOPER
 
 # Repetition ------------------------------------------------------
 
@@ -443,6 +450,19 @@ def repetition_statements(statement: Repetition) -> list[Statement]:
 def assignment_variable(statement: Assignment) -> str:
     return statement.variable
 
+# Condition -------------------------------------------------------
+
+def get_condoper(condition: Condition) -> str:
+    return condition.condoper
+
+def is_condoper(condoper: str) -> str:
+    return condoper in CONDOPER
+
+def condition_left_expression(condition: Condition) -> Expression:
+    return condition.left_expression
+
+def condition_right_expression(condition: Condition) -> Expression:
+    return condition.condition_right_expression
 
 # MAIN ==================================================================================================
 

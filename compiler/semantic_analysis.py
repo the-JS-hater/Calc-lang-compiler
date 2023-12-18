@@ -127,7 +127,11 @@ def analyze_expression(expression: Expression, variable_lookup_table: dict, scop
         
         if not variable in variable_lookup_table:
             raise SyntaxError() # TODO format this
-
+        
+        if variable_lookup_table[variable] > scope:
+            raise SyntaxError()
+        
+        return
 
     if is_binary_expression(expression):
         analyze_binary_expression(expression, variable_lookup_table, scope + 1)
@@ -136,8 +140,11 @@ def analyze_expression(expression: Expression, variable_lookup_table: dict, scop
 
 
 def analyze_binary_expression(binary_expression: Binary_expression, variable_lookup_table: dict, scope: int):
-    pass
+    analyze_expression(left_expression(binary_expression), variable_lookup_table, scope + 1)
+    is_binary_operator(get_binary_operator(binary_expression))
+    analyze_expression(right_expression(binary_expression), variable_lookup_table, scope + 1)
 
+    return
 
 def analyze_condition(condiotion: Condition, variable_lookup_table: dict, scope: int) -> None:
     pass
